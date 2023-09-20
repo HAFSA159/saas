@@ -9,32 +9,32 @@ struct TODO
 
 struct TODO liste[90];
 int nbTask = 0;
+int globalId = 0;
 
 // for task adding
 void addTask(int n){
-    struct TODO newTask[n] ;
-    newTask->id = nbTask + 1;
-for(int i=0;i<n;i++){
+    liste[nbTask].id = globalId;
 
 printf("\nEnter a titel : ");
-scanf("%s",newTask[i].titel);
+scanf("%s",liste[nbTask].titel);
 printf("\nEnter a description : ");
-scanf("%s",newTask[i].desc);
+scanf("%s",liste[nbTask].desc);
 printf("\nEnter a deadline for the task : ");
-scanf("%d",&newTask[i].deadline);
+scanf("%d",&liste[nbTask].deadline);
 printf("\nEnter the status of the task /(todo, doing, done)/: ");
-scanf("%s",newTask[i].status);
+scanf("%s",liste[nbTask].status);
 printf("\nTask added successfully :D \n");
-}
+
+    nbTask++;
+    globalId++;
 }
 
 //for showing the status
 void diplayTasks(int n){
-    struct TODO liste[n];
     printf("Liste des taches :\n");
-    printf("ID\tTitre\tDescription\tDeadline\tStatut\n");
+    printf("ID\tTITRE\tDESCRIPTION\tDEADLINE\tSTATUT\n");
     for (int i = 0; i < n; i++) {
-        printf("%d\t%s\t%s\t\t%d\t\t%s\n", liste[i].id, liste[i].titel, liste[i].desc, liste[i].deadline, liste[i].status);
+        printf("%d\t%s\t%s\t\t%d\t\t%s\n",liste[i].id, liste[i].titel, liste[i].desc, liste[i].deadline, liste[i].status);
     }
 }
 
@@ -63,7 +63,11 @@ switch (choice)
 case 1:
 printf("How many tasks you want to enter ?");
 scanf("%d",&n);
+int i=0;
+while(i<n) {
   addTask(n);
+  i++;
+}
     break;
 case 4:
   diplayTasks(n);
