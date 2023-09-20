@@ -3,42 +3,52 @@
 
 struct TODO
 {
-    int id;
-    char titel[20] , desc[200] , deadline[10], status[50]; 
+    int id , deadline;
+    char titel[20] , desc[200] , status[50];
 };
 
 struct TODO liste[90];
 int nbTask = 0;
 
 // for task adding
-void addTask(){
-    struct TODO newTask;
-    newTask.id = nbTask + 1;
-printf("Enter a titel : ");
-scanf("%s",newTask.titel);
+void addTask(int n){
+    struct TODO newTask[n] ;
+    newTask->id = nbTask + 1;
+for(int i=0;i<n;i++){
+
+printf("\nEnter a titel : ");
+scanf("%s",newTask[i].titel);
 printf("\nEnter a description : ");
-scanf("%s",newTask.desc);
+scanf("%s",newTask[i].desc);
 printf("\nEnter a deadline for the task : ");
-scanf("%s ",newTask.deadline);
+scanf("%d",&newTask[i].deadline);
 printf("\nEnter the status of the task /(todo, doing, done)/: ");
-scanf("%s ",newTask.status);
- liste[nbTask]=newTask;
- nbTask++;
-printf("Task added successfully :D");
+scanf("%s",newTask[i].status);
+printf("\nTask added successfully :D \n");
+}
 }
 
 //for showing the status
-void diplayTasks(){
+void diplayTasks(int n){
+    struct TODO liste[n];
     printf("Liste des taches :\n");
     printf("ID\tTitre\tDescription\tDeadline\tStatut\n");
-    for (int i = 0; i < nbTask; i++) {
-        printf("%d\t%s\t%s\t%s\t%s\n", liste[i].id, liste[i].titel, liste[i].desc, liste[i].deadline, liste[i].status);
+    for (int i = 0; i < n; i++) {
+        printf("%d\t%s\t%s\t\t%d\t\t%s\n", liste[i].id, liste[i].titel, liste[i].desc, liste[i].deadline, liste[i].status);
     }
 }
 
-//for diplaying the menu 
+//to exit
+void exitProgram() {
+    printf("BYE BYE!\n");
+    exit(0);
+}
+
+//for diplaying the menu
 int main(){
-int choice;
+int choice , n;
+
+while(1){
 printf("^^^^^^^^^^^^^ WELCOME 'TODO LIST' ^^^^^^^^^^^^^\n");
 printf("*** THE MENU ***\n");
 printf("1. Add a New Task \n");
@@ -51,19 +61,20 @@ scanf("%d", &choice);
 switch (choice)
 {
 case 1:
-  addTask();
+printf("How many tasks you want to enter ?");
+scanf("%d",&n);
+  addTask(n);
     break;
 case 4:
-  diplayTasks();
+  diplayTasks(n);
     break;
 case 5:
-   printf("BYE BYE!");
+   exitProgram();
     break;
 default:
- printf("Invalid choice, Try Again");
+ printf("Invalid choice, Try Again\n");
     break;
 }
 }
-
-
+}
 
