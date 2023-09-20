@@ -16,14 +16,14 @@ void addTask(){
     newTask.id = nbTask + 1;
 printf("Enter a titel : ");
 scanf("%s",newTask.titel);
-printf("Enter a description : ");
+printf("\nEnter a description : ");
 scanf("%s",newTask.desc);
-printf("Enter a deadline for the task : ");
-scanf("%s",newTask.deadline);
-printf("Enter the status of the task /(todo, doing, done)/: ");
-scanf("%s",newTask.status);
- task[nbTask]=newTask;
- newTask++
+printf("\nEnter a deadline for the task : ");
+scanf("%s ",newTask.deadline);
+printf("\nEnter the status of the task /(todo, doing, done)/: ");
+scanf("%s ",newTask.status);
+ liste[nbTask]=newTask;
+ nbTask++;
 printf("Task added successfully :D");
 }
 
@@ -32,7 +32,7 @@ void diplayTasks(){
     printf("Liste des taches :\n");
     printf("ID\tTitre\tDescription\tDeadline\tStatut\n");
     for (int i = 0; i < nbTask; i++) {
-        printf("%d\t%s\t%s\t%s\t%s\n", liste[i].id, liste[i].title, liste[i].description, liste[i].deadline, liste[i].status);
+        printf("%d\t%s\t%s\t%s\t%s\n", liste[i].id, liste[i].titel, liste[i].desc, liste[i].deadline, liste[i].status);
     }
 }
 
@@ -43,20 +43,20 @@ printf("^^^^^^^^^^^^^ WELCOME 'TODO LIST' ^^^^^^^^^^^^^\n");
 printf("*** THE MENU ***\n");
 printf("1. Add a New Task \n");
 printf("2. Modify a Task\n");
-printf("3. Delete a Task ");
-printf("4. Display the tasks");
-printf("5. EXIT");
+printf("3. Delete a Task \n");
+printf("4. Display the tasks\n");
+printf("5. EXIT\n");
 scanf("%d", &choice);
 
 switch (choice)
 {
-case "1":
+case 1:
   addTask();
     break;
-case"4":
+case 4:
   diplayTasks();
     break;
-case "5":
+case 5:
    printf("BYE BYE!");
     break;
 default:
