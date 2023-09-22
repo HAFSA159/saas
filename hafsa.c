@@ -7,13 +7,12 @@ struct TODO {
     char titel[20], desc[200], status[50];
 };
 
-
 struct TODO liste[30];
 
 int nbTask = 0;
 int globalId = 1;
 
-char listOfStatus[10][10] = {"todo", "doing", "done"};
+char listOfStatus[3][10] = {"todo", "doing", "done"};
 // Function to add a task
 
 int isValidStatus(char status[]) {
@@ -53,25 +52,39 @@ void addTask() {
 
 // Function to modify a task by ID
 void modifyTask() {
-    int modificationID;
+    int modificationID ,choix;
     printf("\nEnter the ID of the task you want to modify: ");
     scanf("%d", &modificationID);
+    
     int check = 0;
+    
     for (int i = 0; i < nbTask; i++) {
-        if (liste[i].id == modificationID) {
-            
-            printf("\nEnter a new title: ");
-            scanf("%s", liste[i].titel);
+     if (liste[i].id == modificationID) {
+
+    printf("TAP 1 if you wanna change the titel \n");
+    printf("TAP 2 if you wanna change the description \n");
+    printf("TAP 3 if you wanna change the deadline \n");
+    printf("Enter your choice");
+    scanf("%d",&choix);
+    
+    switch(choix){
+    case 1 :
+            printf("\nEnter a new titel: ");
+            scanf("%s", liste[i].titel); 
+            break;
+    case 2 :        
             printf("Enter a new description: ");
             scanf("%s", liste[i].desc);
+            break;
+    case 3 :        
             printf("Enter a new deadline for the task: ");
             scanf("%d", &liste[i].deadline);
-            
-            check = 1; // Task found and modified
             break;
         }
+         check = 1; // Task found and modified
+            break;
     }
-
+}
     if (check == 0) {
         printf("Task with ID %d not found\n", modificationID);
     } else {
