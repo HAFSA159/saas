@@ -9,11 +9,23 @@ struct TODO {
 
 
 struct TODO liste[30];
-int nbTask = 0;
-int globalId = 0;
 
+int nbTask = 0;
+int globalId = 1;
+
+char listOfStatus[10][10] = {"todo", "doing", "done"};
 // Function to add a task
+
+int isValidStatus(char status[]) {
+    for (int i = 0; i < 3; i++) {
+        if (strcmp(status, listOfStatus[i]) == 0) {
+            return 1; // Valid status found
+        }
+    }
+    return 0; // Status is not valid
+}
 void addTask() {
+
     printf("How many tasks do you want to enter? ");
     scanf("%d", &nbTask);
 
@@ -27,9 +39,13 @@ void addTask() {
         scanf("%d", &liste[k].deadline);
         printf("Enter the status of the task (todo, doing, done): ");
         scanf("%s", liste[k].status);
-        
-        // nbTask++;
-        globalId++;
+
+        if (!isValidStatus(liste[k].status)) {
+            printf("Invalid status. Please enter a valid status (todo, doing, done).\n");
+            k--; // Decrement k to re-enter the status
+        } else {
+            globalId++;
+        }
     }
 
     printf("\nTask added successfully 😄\n");
@@ -41,9 +57,9 @@ void modifyTask() {
     printf("\nEnter the ID of the task you want to modify: ");
     scanf("%d", &modificationID);
     int check = 0;
-
     for (int i = 0; i < nbTask; i++) {
         if (liste[i].id == modificationID) {
+            
             printf("\nEnter a new title: ");
             scanf("%s", liste[i].titel);
             printf("Enter a new description: ");
@@ -73,6 +89,67 @@ void displayTasks() {
     }
 }
 
+
+
+void statistics() {
+
+    int choice = 0;
+    char isCompleted[50] = "";
+
+    printf("1: Show total number of tasks\n");
+    printf("2: Show total of tasks Completed\n");
+    printf("3: Show total of tasks Incompleted\n");
+    printf("4: Show total rest of days left for tasks\n");
+    scanf("%d", &choice);
+
+
+    switch (choice)
+    {
+    case 1:
+        printf("Total number of tasks: %d\n", nbTask);
+        break;
+    case 2:
+        int completed = 0;
+        for (int i = 0; i < nbTask; i++)
+        {   
+            if (strcmp(liste[i].status, "done") == 0) {
+                completed++;
+            } 
+        }
+
+        if(completed != 0) printf("Total number of tasks completed: %d\n", completed);
+        
+        break;
+
+    case 3:
+        int incompleted = 0;
+        for (int i = 0; i < nbTask; i++)
+        {   
+            if (strcmp(liste[i].status, "doing") == 0 || strcmp(liste[i].status, "todo") == 0) {
+                incompleted++;
+            } 
+        }
+          if(incompleted != 0) printf("Total number of tasks Incompleted: %d\n", incompleted);
+        
+        break;
+    case 4:
+        int remaining = 0;
+        for (int i = 0; i < nbTask; i++)
+        {   
+            if (strcmp(liste[i].status, "doing") == 0 || strcmp(liste[i].status, "todo") == 0) {
+                incompleted++;
+            } 
+        }
+          if(incompleted != 0) printf("Total number of tasks Incompleted: %d\n", incompleted);
+        
+        break;
+    default:
+        break;
+    }
+
+}
+
+
 // Function to exit the program
 void exitProgram() {
     printf("BYE BYE!\n");
@@ -89,7 +166,8 @@ int main() {
         printf("2. Modify a Task\n");
         printf("3. Delete a Task\n");
         printf("4. Display the tasks\n");
-        printf("5. EXIT\n");
+        printf("5. Tasks statistics\n");
+        printf("6. EXIT\n");
         scanf("%d", &choice);
 
         switch (choice) {
@@ -104,6 +182,9 @@ int main() {
                 displayTasks();
                 break;
             case 5:
+                statistics();
+            break;
+            case 6:
                 exitProgram();
                 break;
             default:
