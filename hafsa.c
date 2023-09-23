@@ -123,8 +123,7 @@ void displayTasks() {
         printf("%d\t%s\t%s\t\t%d\t\t%s\n", liste[i].id, liste[i].titel, liste[i].desc, liste[i].deadline, liste[i].status);
     }
 }
-// Function to delete a task by ID
-/*void deleteTask(){
+void deleteTask() {
     int findId;
 printf("Enter the ID");
 scanf(" %d",&findId);
